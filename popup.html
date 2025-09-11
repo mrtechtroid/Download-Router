@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Router</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 320px;
+      min-height: 400px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .header {
+      padding: 16px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .content {
+      padding: 16px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .rule-item {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+
+    .rule-name {
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .rule-folder {
+      font-size: 12px;
+      color: #64748b;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .rule-matchers {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .matcher-tag {
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 1px 4px;
+      border-radius: 3px;
+      margin-right: 4px;
+      margin-bottom: 2px;
+      display: inline-block;
+    }
+
+    .no-rules {
+      text-align: center;
+      color: #64748b;
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    .button {
+      background: #0f172a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+
+    .button:hover {
+      background: #1e293b;
+    }
+
+    .button.secondary {
+      background: white;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+
+    .button.secondary:hover {
+      background: #f9fafb;
+    }
+
+    .current-site {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .current-site-title {
+      font-weight: 500;
+      color: #854d0e;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .current-site-url {
+      font-size: 11px;
+      color: #a16207;
+      word-break: break-all;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .button-small {
+      flex: 1;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Download Router</h1>
+    <p id="currentUrl">Loading...</p>
+  </div>
+
+  <div class="content">
+    <div class="current-site" id="currentSite">
+      <div class="current-site-title">Active Rules for Current Site</div>
+      <div class="current-site-url" id="siteUrl">-</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Matching Rules</div>
+      <div id="rulesContainer">
+        <div class="loading">Loading rules...</div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="button button-small" id="openOptions">Manage Rules</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
