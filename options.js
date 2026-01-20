@@ -135,6 +135,12 @@ class OptionsManager {
               <div style="margin-top: 8px;">${matchersList}</div>
             </div>
             <div class="rule-actions">
+              <button class="button secondary small" id="rule_action_up_${rule.id}" ${index === 0 ? 'disabled' : ''}>
+                ⬆️
+              </button>
+              <button class="button secondary small" id="rule_action_down_${rule.id}" ${index === this.rules.length - 1 ? 'disabled' : ''}>
+                ⬇️
+              </button>
               <button class="button secondary small" id="rule_action_edit_${rule.id}">
                 ✏️ Edit
               </button>
@@ -150,6 +156,12 @@ class OptionsManager {
     editruleId = editruleId || '';
     this.rules.map(rule => {
         if (editruleId!=rule.id){
+            document.getElementById(`rule_action_up_${rule.id}`).onclick = () => {
+                this.moveRuleUp(rule.id);
+            }
+            document.getElementById(`rule_action_down_${rule.id}`).onclick = () => {
+                this.moveRuleDown(rule.id);
+            }
             document.getElementById(`rule_action_edit_${rule.id}`).onclick = () => {
                 this.editRule(rule.id);
             }
@@ -216,6 +228,26 @@ class OptionsManager {
     const modal = document.getElementById('ruleModal');
     modal.classList.remove('active');
     this.editingIndex = -1;
+  }
+
+  async moveRuleUp(ruleId) {
+    const index = this.rules.findIndex(rule => rule.id === ruleId);
+    if (index > 0) {
+      [this.rules[index - 1], this.rules[index]] = [this.rules[index], this.rules[index - 1]];
+      await this.saveRules();
+      this.renderRules();
+    }
+  }
+
+
+
+  async moveRuleDown(ruleId) {
+    const index = this.rules.findIndex(rule => rule.id === ruleId);
+    if (index >= 0 && index < this.rules.length - 1) {
+      [this.rules[index], this.rules[index + 1]] = [this.rules[index + 1], this.rules[index]];
+      await this.saveRules();
+      this.renderRules();
+    }
   }
 
   async saveRule() {
